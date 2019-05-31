@@ -1,0 +1,15 @@
+
+# parcel output - gets generated when you call parcel, so don't keep this
+dist
+node_modules
+yarn.lock
+package.json
+
+# gradle
+build
+.gradle
+.cache
+
+# intellij
+.idea
+out
