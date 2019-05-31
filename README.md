@@ -1,4 +1,4 @@
-Kotlin-js-gradle-parcel
+# Kotlin-js-gradle-parcel
 
 Simple proof of concept to build a kotlin js web application with a minimum of npm/yarn stuff involved.
 
