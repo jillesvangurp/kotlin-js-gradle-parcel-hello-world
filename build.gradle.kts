@@ -2,6 +2,7 @@ import com.moowork.gradle.node.yarn.YarnTask
 
 plugins {
     id("kotlin2js") version "1.3.31"
+    id("kotlin-dce-js") version "1.3.31"
     id("com.moowork.node") version "1.3.1"
 }
 
@@ -18,63 +19,34 @@ tasks {
     compileKotlin2Js {
         kotlinOptions {
             outputFile = "${sourceSets.main.get().output.resourcesDir}/output.js"
-            sourceMap = true
+            sourceMap = false
             moduleKind = "umd"
         }
     }
 
-
-    val unpackJars by registering {
-        group = "build"
-        description = "Unpack the Kotlin JavaScript standard library"
-        val outputDir = file("$buildDir/$name")
-        inputs.property("compileClasspath", configurations.compileClasspath.get())
-        outputs.dir(outputDir)
-
-        doLast {
-            val jars = configurations.compileClasspath.get().filter {
-                it.name.matches(Regex(".+\\.jar"))
-            }
-            jars.forEach {jar ->
-                copy {
-                    includeEmptyDirs = false
-                    from(zipTree(jar))
-                    into(outputDir)
-                    include("**/*.js","**/*.map")
-                    exclude("META-INF/**")
-                }
-            }
+    runDceKotlinJs {
+        setDependsOn(listOf(compileKotlin2Js))
+        dceOptions {
+            keep("main")
         }
     }
-
-
-    val assembleWeb by registering(Copy::class) {
-        group = "build"
-        description = "Assemble the web application"
-        includeEmptyDirs = false
-        from(unpackJars)
-        from(sourceSets.main.get().output) {
-            exclude("**/*.kjsm")
-        }
-        into("$buildDir/web")
-    }
-
+    
     val installParcel by creating(YarnTask::class) {
         setArgs(listOf("add","parcel"))
     }
 
     val parcel by creating(YarnTask::class) {
-        dependsOn(assembleWeb)
+        dependsOn(runDceKotlinJs)
         setArgs(listOf("parcel","index.html"))
     }
 
     val parcelBuild by creating(YarnTask::class) {
         dependsOn(installParcel)
+        dependsOn(runDceKotlinJs)
         setArgs(listOf("parcel","build","index.html"))
     }
 
     assemble {
-        dependsOn(assembleWeb)
         dependsOn(parcelBuild)
     }
 }
