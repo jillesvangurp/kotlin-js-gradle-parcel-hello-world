@@ -6,7 +6,7 @@ Currently, you need parcel installed. You first build the javascript using the g
 
 # How it works
 
-Kotlin-js produces nice javascript in a build directory. We use gradle to do all that stuff. After it does that, all that remains to be done is packaging it up. We use parcel for that.
+Kotlin-js produces nice javascript in a build directory. We use gradle to do all that stuff. After it does that, all that remains to be done is packaging it up. We use parcel for that (via a the `com.moowork.node` gradle plugin).
 
 Parcel is nice in two ways:
 
@@ -19,14 +19,20 @@ We use parcel to package that up. If you want it can also do sass processing and
 
 # Running
 
+Compiles kotlin and runs parcel against the `index.html`
+
+
 ```
-./gradlew build
-parcel index.html
+./gradlew parcel
+
 ```
+
+If you haven't yet, run `gradlew build` once to get yarn to install parcel.
 
 # Production build
 
+Installs parcel, compiles, and then calls `parcel build`
+
 ```
 ./gradlew build
-parcel build index.html
 ```

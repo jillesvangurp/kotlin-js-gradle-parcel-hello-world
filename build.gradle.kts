@@ -64,13 +64,17 @@ tasks {
     }
 
     val parcel by creating(YarnTask::class) {
+        dependsOn(assembleWeb)
+        setArgs(listOf("parcel","index.html"))
+    }
+
+    val parcelBuild by creating(YarnTask::class) {
         dependsOn(installParcel)
         setArgs(listOf("parcel","build","index.html"))
     }
 
-
     assemble {
         dependsOn(assembleWeb)
-        dependsOn(parcel)
+        dependsOn(parcelBuild)
     }
 }
