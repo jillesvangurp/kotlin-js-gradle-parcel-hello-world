@@ -40,7 +40,7 @@ tasks {
                     includeEmptyDirs = false
                     from(zipTree(jar))
                     into(outputDir)
-                    include("**/*.js")
+                    include("**/*.js","**/*.map")
                     exclude("META-INF/**")
                 }
             }
