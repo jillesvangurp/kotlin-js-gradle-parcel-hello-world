@@ -1,3 +1,5 @@
+package main
+
 import kotlin.browser.document
 
 import kotlinx.html.*
