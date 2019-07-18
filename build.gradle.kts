@@ -1,8 +1,8 @@
 import com.moowork.gradle.node.yarn.YarnTask
 
 plugins {
-    id("kotlin2js") version "1.3.40"
-    id("kotlin-dce-js") version "1.3.40"
+    id("kotlin2js") version "1.3.41"
+    id("kotlin-dce-js") version "1.3.41"
     id("com.moowork.node") version "1.3.1"
 }
 

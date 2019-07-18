@@ -9,10 +9,17 @@ import kotlin.browser.window
 
 fun main() {
     val myDiv = document.create.div {
-        (1 until 2).forEach {
+        h1 {
+            +"I can has DOM access"
+        }
+
+        (1 until 5).forEach {
             p {
                 +"hello there $it"
             }
+        }
+        p {
+            +"wait for it"
         }
 
     }
@@ -21,9 +28,9 @@ fun main() {
 
     window.setTimeout({
         myDiv.replaceWith(document.create.div {
-            (1 until 100).forEach {
+            (1 until 1000).forEach {
                 p {
-                    +"hello there $it"
+                    +"Oh Hai! $it"
                 }
             }
 
