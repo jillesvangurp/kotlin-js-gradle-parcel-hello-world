@@ -1,3 +1,13 @@
+# OBSOLETE
+
+If you landed here hoping to get started with kotlin-js, move on. Everything changed since I created this project last year.
+
+As of kotlin 1.3.70, use their updated (finally) documentation for their new and improved org.jetbrains.kotlin.js plugin. 
+
+Short version, that finally does everything. Webpack gets used underneath but you don't have to deal with it. It gets npmp dependencies and if you use dukat even gets you kotlin bindings from typescript defs (sort of works for simple things). Most importantly it runs dead code elimination and produces a minified, production ready distribution that has reasonable size even if you use some frameworks, co-routines, and all that goodness.
+
+Still some rough edges but planning to have a go at doing some simple UI stuff in Kotlin as this finally seems good enough.
+
 # Kotlin-js-gradle-parcel
 
 Simple proof of concept to build a kotlin js web application with a minimum of npm/yarn stuff involved.
